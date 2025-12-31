@@ -1,0 +1,107 @@
+{% extends "base.pug" %}
+{% block title %}导入数据库{% endblock %}
+{% block css %}
+style.
+  /* Custom styles for import page */
+  .import-container {
+    max-width: 600px;
+    margin: 2rem auto;
+    animation: fadeIn 0.5s ease-in-out;
+  }
+  
+  .import-card {
+    background: white;
+    border-radius: var(--border-radius-lg);
+    box-shadow: var(--shadow-lg);
+    padding: 2rem;
+  }
+  
+  .import-title {
+    background: var(--primary-gradient);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    font-weight: 800;
+    margin-bottom: 2rem;
+  }
+  
+  .form-label {
+    font-weight: 600;
+    color: #4a5568;
+    margin-bottom: 0.5rem;
+    display: block;
+  }
+  
+  .form-submit {
+    margin-top: 1.5rem;
+  }
+  
+  .help-link {
+    margin-top: 1.5rem;
+    text-align: center;
+    color: #667eea;
+    text-decoration: none;
+    transition: var(--transition);
+  }
+  
+  .help-link:hover {
+    color: #764ba2;
+    text-decoration: underline;
+  }
+  
+  .wait-message {
+    color: #718096;
+    font-style: italic;
+    margin-right: 1rem;
+  }
+
+script
+  | $(function () {
+  |     $('#submit-btn').on('click', function (e) {
+  |         $('#wait').text('导入数据成功后将自动跳转...')
+  |         $('#submit-btn').attr('disabled', true)
+  |     })
+  | })
+{% endblock %}
+
+{% block content %}
+
+div.import-container
+  div.import-card
+    h3.import-title.text-center 导入数据库
+    
+    {% if message %}
+    div.alert.alert-warning.fade-in
+      | 您的输入有问题😯(报错详见命令行)
+      | {{ message }}
+    {% endif %}
+    
+    form(method="post" action='/import/')#pwdForm.d-flex.flex-column
+      {% csrf_token %}
+      
+      div.form-group
+        label.form-label 单词本的名字（请用英文，不带空格）
+        input(type="text" name="BOOK" placeholder="eg: CET6_green" required='true').form-control
+      
+      div.form-group
+        label.form-label 单词本的中文名
+        input(type="text" name="BOOK_zh" placeholder="eg: 新东方六级绿皮书" required='true').form-control
+      
+      div.form-group
+        label.form-label 单词本的缩写（用于日历显示，建议一个英文大写字符）
+        input(type="text" name="BOOK_abbr" placeholder="eg: G" required='true').form-control
+      
+      div.form-group
+        label.form-label 单词本 list、unit、index 的序号从 0 开始还是从 1 开始
+        input(type="text" name="begin_index" placeholder="输入 0 或 1" required='true').form-control
+      
+      div.form-group
+        label.form-label 单词 excel 文件路径（绝对路径）
+        input(type="text" name="excel_path" placeholder="/file/path/to/excel.xls" required='true').form-control
+      
+      div.d-flex.align-items-center.justify-content-center.form-submit
+        p#wait.wait-message
+        button(type='submit').btn.btn-primary#submit-btn 开始导入数据
+      
+      a.help-link(href="https://github.com/Benature/WordReview/blob/ben/doc/database_init.md#%E7%BD%91%E9%A1%B5%E5%AF%BC%E5%85%A5" target="_blank") 对导入的设置内容有疑惑？点这里
+{% endblock %}

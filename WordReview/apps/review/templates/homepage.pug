@@ -1,0 +1,178 @@
+{% extends "base.pug" %}
+{% block title %}复习主页{% endblock %}
+{% block css %}
+script(src="/static/js/homepage.js")
+style
+  | /* Homepage specific styles */
+  | .list-block {
+  |     width: 120px;
+  |     padding: 1rem;
+  |     background: white;
+  |     box-shadow: var(--shadow-sm);
+  |     border-radius: var(--border-radius);
+  |     text-align: center;
+  |     margin: 10px;
+  |     cursor: pointer;
+  |     transition: var(--transition);
+  |     text-decoration: none;
+  |     color: #4a5568;
+  |     font-weight: 600;
+  |     display: block;
+  | }
+  | 
+  | .list-block:hover {
+  |     transform: translateY(-2px);
+  |     box-shadow: var(--shadow-md);
+  |     background: var(--light-gradient);
+  | }
+  | 
+  | #yesterday-mode {
+  |     width: 35%;
+  |     max-width: 300px;
+  |     padding: 1rem;
+  |     background: var(--secondary-gradient);
+  |     color: white;
+  |     box-shadow: var(--shadow-md);
+  |     border-radius: var(--border-radius);
+  |     text-align: center;
+  |     margin: 20px auto;
+  |     cursor: pointer;
+  |     transition: var(--transition);
+  |     text-decoration: none;
+  |     font-weight: 600;
+  | }
+  | 
+  | #yesterday-mode:hover {
+  |     transform: translateY(-2px);
+  |     box-shadow: var(--shadow-lg);
+  |     opacity: 0.9;
+  | }
+  | 
+  | .progress {
+  |     font-size: 10px;
+  |     height: 13px;
+  |     border-radius: var(--border-radius);
+  |     overflow: hidden;
+  |     background: #e2e8f0;
+  | }
+  | 
+  | .progress-bar {
+  |     background: var(--success-gradient);
+  |     transition: width 0.6s ease;
+  | }
+  | 
+  | #tmpl-qotd {
+  |   display: flex;
+  |   justify-content: center;
+  |   margin: 2rem 0;
+  |   font-style: italic;
+  |   color: #718096;
+  |   text-align: center;
+  |   padding: 1rem;
+  | }
+  | 
+  | .github {
+  |   margin: 0 3px
+  | }
+  | 
+  | .book-item {
+  |     margin-right: 30px;
+  |     margin-bottom: 30px;
+  |     min-width: 150px;
+  |     background: white;
+  |     border-radius: var(--border-radius);
+  |     padding: 1.5rem;
+  |     box-shadow: var(--shadow-sm);
+  |     transition: var(--transition);
+  | }
+  | 
+  | .book-item:hover {
+  |     box-shadow: var(--shadow-md);
+  |     transform: translateY(-2px);
+  | }
+  | 
+  | .calendar-link {
+  |     text-align: right;
+  |     display: block;
+  |     margin-bottom: 2rem;
+  |     color: #667eea;
+  |     text-decoration: none;
+  |     font-weight: 600;
+  |     transition: var(--transition);
+  | }
+  | 
+  | .calendar-link:hover {
+  |     color: #764ba2;
+  |     text-decoration: underline;
+  | }
+  | 
+  | .import-link {
+  |     text-align: center;
+  |     display: block;
+  |     margin-top: 2rem;
+  |     color: #667eea;
+  |     text-decoration: none;
+  |     font-weight: 600;
+  |     transition: var(--transition);
+  | }
+  | 
+  | .import-link:hover {
+  |     color: #764ba2;
+  |     text-decoration: underline;
+  | }
+  | 
+  | /* Responsive design */
+  | @media (max-width: 768px) {
+  |   #yesterday-mode {
+  |     width: 80%;
+  |   }
+  |   
+  |   .book-item {
+  |     margin-right: 15px;
+  |     margin-bottom: 15px;
+  |     min-width: 120px;
+  |     padding: 1rem;
+  |   }
+  | }
+{% endblock %}
+
+{% block content %}
+div.container.flex-column
+  a.calendar-link(href="/calendar/") 艾宾浩斯复习日历
+  
+  #tmpl-qotd
+
+  div#yesterday-mode.list-block(href="/review/review?limit=50")
+    a 昨日重现
+  div.d-flex.flex-wrap
+    {% for d in data%}
+    div.book-item
+      div
+        h2.book-title.text-center {{d.name}}
+        div.d-flex.justify-content-center.align-items-center
+          {% for l in d.lists %}
+          div.list-block(href='/review/review?list={{l.i}}&book={{d.name_en}}')
+            {% if l.index == 0 %}
+            h4 List {{l.i|add:1}}
+            {% else %}
+            h4 List {{l.i}}
+            {% endif %}
+            div
+              a {{l.len}}
+              sub(style="font-size:10px; color: grey;") {{l.del_len}} 
+              a 
+                | [{{l.times}}
+                sub {{l.plus}}
+                | 次]
+            div.progress
+              div.progress-bar(style="width:{{l.rate}}%;" role="progressbar" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100")
+                | {{l.rate}}%
+            div.progress(style="margin-top: 3px;")
+              div.progress-bar(style="width:{{l.recent_rate}}%; background: var(--info-gradient);" role="progressbar" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100")
+                | {{l.recent_rate}}%
+          {% endfor %}
+    {% endfor %}
+  a.import-link(href="/import/") 我要导入新的单词书
+  hr
+
+{% endblock %}

@@ -1,0 +1,201 @@
+/* Calendar styling with modern design */
+
+/* Container styling */
+.flex-column {
+    align-items: center;
+}
+
+/* Table styling */
+table {
+    margin-top: 2rem;
+    border-collapse: separate;
+    border-spacing: 0;
+    background: white;
+    border-radius: var(--border-radius);
+    box-shadow: var(--shadow-md);
+    overflow: hidden;
+    width: 100%;
+    max-width: 1200px;
+}
+
+th {
+    text-align: center;
+    background: var(--primary-gradient);
+    color: white;
+    font-weight: 600;
+    padding: 1.5rem 0.5rem;
+    font-size: 1rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+/* Table data cells */
+td {
+    text-align: center;
+    width: calc(100% / 7);
+    height: 100px;
+    padding: 10px;
+    vertical-align: top;
+    border-bottom: 1px solid #e2e8f0;
+    border-right: 1px solid #e2e8f0;
+    transition: var(--transition);
+}
+
+td:last-child {
+    border-right: none;
+}
+
+tr:last-child td {
+    border-bottom: none;
+}
+
+td:hover {
+    background-color: #f7fafc;
+}
+
+/* Today's date highlighting */
+td.today {
+    background-color: rgba(102, 126, 234, 0.1);
+    position: relative;
+}
+
+td.today::before {
+    content: '';
+    position: absolute;
+    top: 5px;
+    left: 5px;
+    width: 8px;
+    height: 8px;
+    background: var(--primary-gradient);
+    border-radius: 50%;
+}
+
+/* Date styling */
+.td-div {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    height: 100%;
+    align-items: flex-start;
+}
+
+.td-date {
+    color: #4a5568;
+    text-align: left;
+    font-weight: 600;
+    margin-bottom: 5px;
+    font-size: 0.9rem;
+}
+
+/* List items */
+.list {
+    text-align: center;
+    vertical-align: middle;
+    border-radius: var(--border-radius);
+    margin: 2px 0;
+    padding: 4px 8px;
+    min-width: 60px;
+    font-size: 0.8rem;
+    font-weight: 500;
+    transition: var(--transition);
+    box-shadow: var(--shadow-sm);
+}
+
+.list:hover {
+    transform: translateY(-1px);
+    box-shadow: var(--shadow-md);
+}
+
+/* Status styles */
+.undo {
+    background: var(--primary-gradient);
+    color: white;
+    cursor: pointer;
+    border: none;
+}
+
+.undo:hover {
+    opacity: 0.9;
+}
+
+.done {
+    background: var(--success-gradient);
+    color: white;
+    border: none;
+}
+
+.plus {
+    background: var(--light-gradient);
+    color: #718096;
+    border: 1px dashed #cbd5e0;
+}
+
+/* Yesterday mode button */
+#yesterday-mode {
+    width: 35%;
+    max-width: 300px;
+    padding: 15px;
+    margin: 20px 0;
+    background: var(--secondary-gradient);
+    color: white;
+    border-radius: var(--border-radius);
+    text-align: center;
+    cursor: pointer;
+    transition: var(--transition);
+    box-shadow: var(--shadow-md);
+    font-weight: 600;
+    text-decoration: none;
+    display: block;
+}
+
+#yesterday-mode:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-lg);
+    opacity: 0.9;
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+    table {
+        font-size: 0.8rem;
+    }
+    
+    th {
+        padding: 1rem 0.25rem;
+        font-size: 0.8rem;
+    }
+    
+    td {
+        height: 80px;
+        padding: 5px;
+    }
+    
+    .list {
+        padding: 2px 4px;
+        min-width: 40px;
+        font-size: 0.7rem;
+    }
+    
+    #yesterday-mode {
+        width: 80%;
+        padding: 12px;
+        font-size: 0.9rem;
+    }
+}
+
+@media (max-width: 480px) {
+    td {
+        height: 60px;
+    }
+    
+    .td-date {
+        font-size: 0.75rem;
+    }
+    
+    .list {
+        min-width: 35px;
+        font-size: 0.65rem;
+        padding: 1px 3px;
+        margin: 1px 0;
+    }
+}

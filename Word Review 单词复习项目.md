@@ -32,16 +32,16 @@
 
 ## 三、技术栈
 
-| 分类          | 技术           | 版本  |
-| ------------- | -------------- | ----- |
-| 后端框架      | Django         | 3+    |
-| 编程语言      | Python         | 3.7+  |
-| 数据库        | MySQL / SQLite | 8 / 3 |
-| 前端模板      | Pug            | -     |
-| CSS 框架      | Bootstrap      | -     |
-| JavaScript 库 | jQuery         | 3.5.1 |
-| 图表库        | ECharts        | -     |
-| 部署方式      | WSGI / ASGI    | -     |
+|分类|技术|版本|
+|---|---|---|
+|后端框架|Django|3+|
+|编程语言|Python|3.7+|
+|数据库|MySQL / SQLite|8 / 3|
+|前端模板|Pug|-|
+|CSS 框架|Bootstrap|-|
+|JavaScript 库|jQuery|3.5.1|
+|图表库|ECharts|-|
+|部署方式|WSGI / ASGI|-|
 ## 四、安装与部署
 
 ### 4.1 前置准备
@@ -243,47 +243,14 @@ WordReview/
 
 ## 十、核心文件说明
 
-| 文件路径               | 功能说明                                            |
-| ---------------------- | --------------------------------------------------- |
-| apps/review/views.py   | 核心视图函数与 API 接口（单词加载、复习记录更新等） |
-| apps/review/models.py  | 数据模型定义（单词书、单词、复习记录等）            |
-| static/js/review.js    | 复习页面前端逻辑（卡片渲染、记忆曲线绘制）          |
-| static/js/calendar.js  | 艾宾浩斯日历渲染与复习计划展示逻辑                  |
-| apps/review/templates/ | 页面模板（homepage.pug 主页、review.pug 复习页）    |
-| WordReview/settings.py | Django 项目全局配置                                 |
+|文件路径|功能说明|
+|---|---|
+|apps/review/views.py|核心视图函数与 API 接口（单词加载、复习记录更新等）|
+|apps/review/models.py|数据模型定义（单词书、单词、复习记录等）|
+|static/js/review.js|复习页面前端逻辑（卡片渲染、记忆曲线绘制）|
+|static/js/calendar.js|艾宾浩斯日历渲染与复习计划展示逻辑|
+|apps/review/templates/|页面模板（homepage.pug 主页、review.pug 复习页）|
+|WordReview/settings.py|Django 项目全局配置|
 ## 十一、总结
 
 本项目通过 Django 框架实现了基于艾宾浩斯遗忘曲线的科学背单词工具，解决了传统背单词效率低、复习无规律的痛点。项目结构清晰、功能完整，支持本地部署保障隐私，具备良好的可扩展性与维护性，可满足不同用户的单词记忆需求。
-
-
-
-
-
-
-
-### 快捷键
-
-|          操作          |                            快捷键                            |   页面   |       状态       |
-| :--------------------: | :----------------------------------------------------------: | :------: | :--------------: |
-|       设为重难词       |             <kbd>Shift</kbd>+<kbd>H</kbd> (Hard)             | 复习页面 |       全局       |
-|       设为已掌握       |             <kbd>Shift</kbd>+<kbd>G</kbd> (Get)              | 复习页面 |       全局       |
-|       设为很熟悉       |           <kbd>Shift</kbd>+<kbd>F</kbd> (Familiar)           | 复习页面 |       全局       |
-|       设为太简单       |             <kbd>Shift</kbd>+<kbd>E</kbd> (Easy)             | 复习页面 |       全局       |
-|     进入笔记输入框     |                     <kbd>N</kbd> (Note)                      | 复习页面 |       全局       |
-|  跳转查看助记法（中）  |          <kbd>T</kbd> (Tips) / <kbd>V</kbd> (View)           | 复习页面 |       全局       |
-|  跳转查看助记法（英）  |                   <kbd>M</kbd> (Mnemonic)                    | 复习页面 |       全局       |
-|     跳转查看近义词     |                   <kbd>S</kbd> (Synonyms)                    | 复习页面 |       全局       |
-|      词卡前后切换      |                  <kbd><</kbd>、<kbd>></kbd>                  | 复习页面 |       全局       |
-|     List 前后切换      | <kbd>Shift</kbd>+<kbd><</kbd>、<kbd>Shift</kbd>+<kbd>></kbd> | 复习页面 |     学习状态     |
-|        查看释义        |                       <kbd>空格</kbd>                        | 复习页面 |     复习状态     |
-|     切换至学习状态     |                    <kbd>P</kbd> (Preview)                    | 复习页面 |     复习状态     |
-|      触发重现模式      |                    <kbd>R</kbd> (Repeat)                     | 复习页面 |     复习状态     |
-| 触发输入模式（实验中） |                     <kbd>I</kbd> (Input)                     | 复习页面 |     复习状态     |
-|         我记得         |                <kbd>Shift</kbd>+<kbd>→</kbd>                 | 复习页面 |     复习状态     |
-|         不认识         |                <kbd>Shift</kbd>+<kbd>←</kbd>                 | 复习页面 |     复习状态     |
-|  复制`WordSand`助记法  |                     <kbd>C</kbd> (Copy)                      | 复习页面 | 安装 Chrome 插件 |
-|     跳转到日历页面     |                   <kbd>C</kbd> (Calendar)                    |   主页   |        -         |
-|     跳转到昨日重现     |                   <kbd>Y</kbd> (Yesterday)                   |   主页   |        -         |
-
-
-
